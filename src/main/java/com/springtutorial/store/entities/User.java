@@ -27,7 +27,7 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(name = "firstname")
-    private String firtsname;
+    private String firstname;
 
     @Column(name = "lastname")
     private String lastname;

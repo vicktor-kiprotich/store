@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springtutorial.store.dtos.LoginRequestDto;
-import com.springtutorial.store.dtos.ResponseDto;
+import com.springtutorial.store.dtos.*;
 import com.springtutorial.store.services.AuthService;
 
 import jakarta.validation.Valid;
@@ -27,6 +26,16 @@ public class AuthController {
             return ResponseEntity.ok(ResponseDto.success("Sign in Successfull", token));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ResponseDto.failure(e.getMessage(), 401));
+        }
+    }
+
+    @PostMapping("signup")
+    public ResponseEntity<ResponseDto<String>> signup(@Valid @RequestBody SignupRequestDto data) {
+        try {
+            String token = authService.signup(data);
+            return ResponseEntity.ok(ResponseDto.success("Signup successfull", token));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ResponseDto.failure(e.getMessage(), 403));
         }
     }
 
